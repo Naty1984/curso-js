@@ -1,19 +1,34 @@
-function verificar(){
+function RetornarIdadeGenero(anoNascimento, genero) {
     var data = new Date()
     var ano = data.getFullYear()
-    var fano = document.getElementById('txtano')
-    var res = document.querySelector('div#res')
-    if (fano.value.length == 0 ||(fano.value) > ano){
-        window.alert('[ERRO] Verifique os dados e tente novamente')
-    }else{
-        var fsex = document.getElementById('radsex')
-        var idade = ano - Number(fano.value)
-        var gênero = ''
-        if (fsex[0]. checked){
-            gênero = 'Homem'
-        }else if(fsex[1].checked){
-            gênero = 'Mulher'
+
+    var anoNascimentos = anoNascimento;
+    var generos = genero;
+
+    var select = document.getElementById('idgenero');
+    var value = select.options[select.selectedIndex].value;
+
+    if (anoNascimentos === '' || generos === '') {
+        alert('Preencha os campos')
+    }else {
+        if(anoNascimentos > ano) {
+            alert('O ano de nascimento é maior que o ano atual, por favor informar um ano válido!')
+        }else{
+            var idade = ano - anoNascimentos;
+            alert('Sua é idade é: '+ idade +' do sexo: ' + value + '');
+            var img = document.createElement('img')
+            img.setAttribute('id', 'foto')
+            if (idade >= 0 && idade <13){
+                img.setAttribute('src', 'menino.jpg')
+            }else if (idade < 21){
+                img.setAttribute('src', 'homem jovem.jpg')
+            }else if (idade < 50){
+                img.setAttribute('src', 'homem.jpg')
+            }else{
+                img.setAttribute('src', 'idoso.jpg')
+            }
         }
-        res.innerHTML = `Detectamos ${gênero} com ${idade} anos.`
-    }
+        res.style.textAlign = 'center'
+        res.appendChild(img)        
+    }  
 }
